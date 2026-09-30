@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recepção que Vende | Nelson Rabelo</title>
+<style>
+:root{
+  --ink:#141828; --ink2:#4A5270; --line:#E3E7EF; --bg:#F5F7FB; --card:#FFFFFF;
+  --blue:#2F6BFF; --blue-soft:#E8EFFF; --lime:#9CC51A; --lime-soft:#F2F9DC; --navy:#0B1020;
+  --red:#D94848; --red-soft:#FDECEC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+
+/* topo fixo (tela) */
+.topbar{position:sticky;top:0;z-index:10;background:var(--navy);color:#fff;display:flex;align-items:center;gap:14px;padding:10px 16px;overflow-x:auto;white-space:nowrap}
+.wm{font-weight:800;font-size:18px;letter-spacing:-.3px;flex:0 0 auto}
+.wm .g{color:#5B8CFF}.wm .f{color:#B8E62E}
+.topbar nav{display:flex;gap:4px;flex:1}
+.topbar nav a{color:#C9D0E4;text-decoration:none;font-size:13.5px;font-weight:600;padding:7px 10px;border-radius:8px}
+.topbar nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+.topbar button{flex:0 0 auto;background:#B8E62E;color:var(--navy);border:0;border-radius:8px;padding:8px 12px;font-weight:700;font-size:13px;cursor:pointer}
+
+.wrap{max-width:860px;margin:0 auto;padding:24px 16px 60px}
+
+/* capa */
+.cover{background:var(--navy);color:#fff;border-radius:20px;padding:40px 28px;margin-bottom:28px;position:relative;overflow:hidden}
+.cover:after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(47,107,255,.45),transparent 70%)}
+.cover .kicker{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#B8E62E;font-weight:700;margin-bottom:14px}
+.cover h1{font-size:clamp(28px,6vw,42px);line-height:1.1;letter-spacing:-.8px;margin-bottom:14px;max-width:620px}
+.cover p{color:#C9D0E4;max-width:600px;font-size:16.5px}
+.cover .author{margin-top:26px;font-size:14px;color:#fff;font-weight:600}
+.cover .author span{display:block;color:#98A2BE;font-weight:400;font-size:13px}
+
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:34px}
+.howto div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.howto b{display:block;margin-bottom:4px}
+.howto span{color:var(--ink2);font-size:14.5px}
+
+/* seções */
+.part{margin-top:44px}
+.part-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:800;margin-bottom:6px}
+h2{font-size:28px;letter-spacing:-.5px;line-height:1.15;margin-bottom:10px}
+h3{font-size:19px;letter-spacing:-.2px;margin:30px 0 10px;padding-top:4px}
+.lead{color:var(--ink2);font-size:17px;margin-bottom:18px}
+p{margin-bottom:12px}
+ul,ol{padding-left:22px;margin-bottom:14px}
+li{margin-bottom:6px}
+
+/* pilares */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0 8px}
+.pillar{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;border-top:4px solid var(--blue)}
+.pillar .l{font-size:30px;font-weight:800;color:var(--blue);line-height:1}
+.pillar b{display:block;margin:6px 0 4px;font-size:16px}
+.pillar span{font-size:14px;color:var(--ink2)}
+.pillar.u{border-top-color:var(--lime)} .pillar.u .l{color:var(--lime)}
+
+/* fluxo */
+.flow{list-style:none;padding:0;counter-reset:f;display:grid;gap:8px}
+.flow li{counter-increment:f;display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0}
+.flow li:before{content:counter(f);flex:0 0 26px;height:26px;border-radius:8px;background:var(--blue-soft);color:var(--blue);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+
+/* script */
+.script{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:16px 16px 14px;margin:12px 0;position:relative;break-inside:avoid}
+.script .meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.script .tag{font-size:11.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--blue)}
+.script .ch{font-size:12.5px;color:var(--ink2)}
+.script .txt{font-size:16px;white-space:pre-line}
+.script .obs{font-size:13.5px;color:var(--ink2);margin-top:8px;font-style:italic}
+.copy{background:var(--blue-soft);color:var(--blue);border:0;border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:700;cursor:pointer;flex:0 0 auto}
+.copy.ok{background:var(--lime-soft);color:#5E7A0A}
+.script.lime{border-left-color:var(--lime)} .script.lime .tag{color:#6E8F0E}
+
+/* caixas de regra */
+.rule{background:var(--lime-soft);border:1px solid #DDEBB0;border-radius:12px;padding:14px 16px;margin:14px 0;break-inside:avoid}
+.rule b{display:block;margin-bottom:4px}
+.warn{background:var(--red-soft);border:1px solid #F4C9C9;border-radius:12px;padding:14px 16px;margin:14px 0;break-inside:avoid}
+.warn b{color:var(--red);display:block;margin-bottom:4px}
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:12px 0 16px;font-size:15px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#EEF1F7;font-size:13px;text-transform:uppercase;letter-spacing:.8px;color:var(--ink2)}
+tr:last-child td{border-bottom:0}
+
+.timeline{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:12px 0}
+.timeline div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center;font-size:13px}
+.timeline b{display:block;font-size:12px;color:var(--blue);margin-bottom:2px}
+.timeline .call{background:var(--blue-soft);border-color:#CFDDFF}
+
+.check{list-style:none;padding:0}
+.check li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);margin:0}
+.check li:before{content:"";flex:0 0 18px;height:18px;border:2px solid var(--ink2);border-radius:4px;margin-top:3px}
+
+.cta{background:var(--navy);color:#fff;border-radius:18px;padding:28px 24px;margin-top:44px;break-inside:avoid}
+.cta h2{color:#fff}
+.cta p{color:#C9D0E4}
+.cta .wm{font-size:22px}
+
+.foot{text-align:center;color:var(--ink2);font-size:13px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line)}
+.foot b{color:var(--ink)}
+
+@media (max-width:600px){ .timeline{grid-template-columns:repeat(4,1fr)} .cover{padding:30px 20px} h2{font-size:24px} }
+
+
+/* ===== TELA: tema escuro (Opção A). Impressão continua clara. ===== */
+@media screen{
+  :root{--ink:#F2F4F8;--ink2:#B7BFD3;--line:#262E45;--bg:#0A0E1A;--card:#141A2B;--blue:#6E9BFF;--blue-soft:#1B2745;--lime:#B3F400;--lime-soft:#17240A;--red:#FF8C96;--red-soft:#2A1216}
+  body{background:var(--bg)}
+  .cover{background:linear-gradient(180deg,#0F1530,#0A0E1A);border:1px solid var(--line)}
+  .cover .kicker,.topbar button{color:var(--lime)} .topbar button{background:var(--lime);color:#0A0E1A}
+  .topbar{background:#070A14;border-bottom:1px solid var(--line)}
+  th{background:#1A2136;color:var(--ink2)}
+  .rule{border-color:#4E6B12} .rule b{color:var(--lime)}
+  .warn{border-color:#7A2C36}
+  .script.lime{border-left-color:var(--lime)} .script.lime .tag{color:var(--lime)}
+  .copy{background:var(--lime);color:#0A0E1A} .copy.ok{background:#2E4A00;color:var(--lime)}
+  .pillar.u{border-top-color:var(--lime)} .pillar.u .l{color:var(--lime)}
+  .timeline .call{background:#1B2745;border-color:#2F4A8A}
+  .cta{background:linear-gradient(135deg,#132352,#0A0E1A);border:1px solid var(--line)}
+  .check li:before{border-color:var(--ink2)}
+  .foot b{color:var(--ink)}
+  h2,h3{letter-spacing:-.4px}
+}
+
+/* ============ IMPRESSÃO ============ */
+@page{size:A4;margin:16mm 14mm 18mm;@bottom-center{content:"Nelson Rabelo  ·  Metodologia GeFit";font-size:8.5pt;color:#6A7390;font-family:Helvetica,Arial,sans-serif}@bottom-right{content:counter(page);font-size:8.5pt;color:#6A7390}}
+@page :first{@bottom-center{content:none}@bottom-right{content:none}}
+@media print{
+  body{background:#fff;font-size:11.5pt}
+  .topbar,.copy,.noprint{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .cover{border-radius:0;margin:-16mm -14mm 10mm;padding:26mm 18mm 20mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cta,.pillar,.flow li:before,.timeline .call,.rule,.warn,th,.script,.cover:after{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .part{break-before:page;margin-top:0}
+  h3{break-after:avoid}
+  .script,.rule,.warn,table,.pillars,.timeline{break-inside:avoid}
+  .foot{border-top:1px solid #E3E7EF;margin-top:10mm}
+  .pillars{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wm" style="color:#fff">Nelson Rabelo</div>
+  <nav>
+    <a href="#aqui">Comunicação</a>
+    <a href="#primeiro-contato">1º contato</a>
+    <a href="#ligacao">Ligação</a>
+    <a href="#indicacao">Funil de Indicação</a>
+    <a href="#rotina">Rotina</a>
+  </nav>
+  <button onclick="window.print()">Imprimir / PDF</button>
+</div>
+
+
+<div class="wrap">
+
+<section class="cover">
+    <div class="kicker">Método de comunicação com leads + funil de indicação</div>
+  <h1>Recepção que Vende</h1>
+  <p>Como conduzir cada conversa com lead do primeiro contato ao agendamento, e como transformar alunos novos em indicações, sem pedido frio de contatos.</p>
+  <div class="author">Nelson Rabelo<span>Mentor de donos de academia · Metodologia GeFit</span></div>
+</section>
+
+<div class="howto">
+  <div><b>Na recepção</b><span>Deixe este arquivo aberto no computador. Cada script tem um botão Copiar.</span></div>
+  <div><b>No celular</b><span>Abra o arquivo pelo navegador e use o menu do topo para ir direto ao funil.</span></div>
+  <div><b>No treinamento</b><span>Imprima e use como roteiro de simulação com a equipe.</span></div>
+</div>
+
+<p><b>Como usar os scripts:</b> troque o que está entre colchetes, como [NOME] e [ACADEMIA], pelos dados reais. Leia, entenda a ideia e fale com as suas palavras. O script é a direção, não uma leitura mecânica.</p>
+
+<!-- =============== PARTE 1 =============== -->
+<section class="part" id="aqui">
+  <div class="part-label">Parte 1</div>
+  <h2>Comunicação com o lead: o método AQÚI</h2>
+  <p class="lead">A recepção é área de vendas e relacionamento, não balcão de informação. O consultor conduz o próximo passo, e cada interação termina com uma ação registrada.</p>
+
+  <div class="pillars">
+    <div class="pillar"><div class="l">A</div><b>Acolher ou Atenção</b><span><b style="display:inline;font-size:14px">Acolher</b> quando o lead chegou e está interagindo: receber, reconhecer a decisão e criar segurança. <b style="display:inline;font-size:14px">Atenção</b> quando somos nós reabordando alguém que sumiu: abrir com contexto, curiosidade ou reconhecimento, nunca com "seja bem-vindo".</span></div>
+    <div class="pillar"><div class="l">Q</div><b>Qualificar</b><span>Descobrir história, objetivo, dor, tentativas anteriores, rotina, urgência e barreiras.</span></div>
+    <div class="pillar u"><div class="l">Ú</div><b>Única Coisa</b><span>Identificar o ponto principal que precisa ser resolvido e fazer o lead verbalizar o valor e a necessidade.</span></div>
+    <div class="pillar"><div class="l">I</div><b>Incentivar</b><span>Conduzir com segurança para o próximo passo. Evitar escolha passiva e encerramento sem ação.</span></div>
+  </div>
+
+  <h3>Regras de ouro</h3>
+  <ul>
+    <li>Responder lead novo rápido: atendimento humano em 3 a 5 minutos, com teto de 10 minutos.</li>
+    <li>O WhatsApp leva para a ligação. A ligação é onde acontece a qualificação e o convite para visita ou experiência.</li>
+    <li>Nunca enviar tabela de preços como primeira resposta. Primeiro entender objetivo, momento e valor percebido.</li>
+    <li>Texto e áudio se complementam: não repetir palavra por palavra a mesma mensagem nos dois formatos.</li>
+    <li>Áudio ideal de 25 a 30 segundos, com teto de 1 minuto. Energia humana, sem leitura mecânica.</li>
+    <li>Nunca repetir a mesma mensagem numa cadência. Cada toque precisa de um novo motivo.</li>
+    <li>Não usar escolha passiva ("quer que eu mande?", "qualquer coisa me chama", "sem compromisso"). O Incentivar conduz com confiança.</li>
+    <li>Toda tentativa gera registro no CRM e o agendamento do próximo contato.</li>
+  </ul>
+
+  <h3>Ajuste de tom pelo perfil (DISC)</h3>
+  <table>
+    <tr><th>Perfil</th><th>Como falar</th></tr>
+    <tr><td><b>D · Diretivo</b></td><td>Curto, objetivo, foco em resultado e velocidade.</td></tr>
+    <tr><td><b>I · Influente</b></td><td>Energia, entusiasmo, conexão e experiência.</td></tr>
+    <tr><td><b>S · Estável</b></td><td>Calma, acolhimento, segurança e previsibilidade.</td></tr>
+    <tr><td><b>C · Calculista</b></td><td>Precisão, dados, detalhes e clareza. Usar palavras como "exatamente".</td></tr>
+  </table>
+
+  <h3 id="primeiro-contato">Fluxo do primeiro contato</h3>
+  <ol class="flow">
+    <li>Lead entra no sistema e é atribuído a um responsável.</li>
+    <li>Humano assume com a mensagem de boas-vindas.</li>
+    <li>Em seguida, envia um áudio curto e pessoal.</li>
+    <li>Convite direto para uma ligação rápida de cerca de 2 minutos.</li>
+    <li>Na ligação, aplicar o AQÚI: histórico, objetivo, barreira, Única Coisa, posicionamento e próximo passo.</li>
+    <li>Agendar visita, café, experiência ou matrícula, conforme o perfil.</li>
+    <li>Confirmar data e horário e registrar no CRM.</li>
+  </ol>
+
+  <div class="script">
+    <div class="meta"><span class="tag">Mensagem de boas-vindas</span><button class="copy">Copiar</button></div>
+    <div class="ch">WhatsApp · assim que o humano assume</div>
+    <div class="txt">Seja muito bem-vindo(a) à [ACADEMIA]. Vi que você demonstrou interesse em conhecer melhor nossa metodologia.
+Parabéns pela decisão de cuidar da sua saúde e dar esse passo.
+Temos uma boa notícia e um presente de boas-vindas para você. Posso te ligar rapidinho por 2 minutinhos para te explicar e entender qual é o melhor projeto para o seu momento?</div>
+  </div>
+
+  <div class="script">
+    <div class="meta"><span class="tag">Áudio logo após a mensagem</span><button class="copy">Copiar</button></div>
+    <div class="ch">Áudio de WhatsApp · 25 a 30 segundos</div>
+    <div class="txt">Oi, [NOME], tudo bem? Aqui é [CONSULTOR] da [ACADEMIA]. Vi que você acabou de chegar por aqui e queria te dar as boas-vindas pessoalmente.
+A gente faz um trabalho bem diferente justamente porque tenta entender primeiro o que cada pessoa precisa antes de indicar qualquer caminho.
+É uma ligação bem rápida, coisa de 2 minutinhos mesmo. Pode ser agora?</div>
+  </div>
+
+  <div class="rule"><b>Se a pessoa não puder falar agora</b>Não transforme o WhatsApp em interrogatório. Faça uma qualificação curta, combine o horário da ligação e registre o próximo contato. O objetivo continua sendo chegar a uma conversa ao vivo.</div>
+
+  <div class="warn"><b>O que não fazer no primeiro atendimento</b>
+    <ul style="margin:6px 0 0">
+      <li>Responder apenas "temos planos a partir de..." e encerrar.</li>
+      <li>Mandar tabela de preços sem contexto.</li>
+      <li>Fazer dez perguntas por texto antes de criar conexão.</li>
+      <li>Encerrar com "qualquer coisa me chama".</li>
+      <li>Considerar o lead perdido porque não respondeu à primeira tentativa.</li>
+    </ul>
+  </div>
+
+  <h3 id="ligacao">A ligação em 4 momentos</h3>
+  <p>A ligação de 2 a 3 minutos não precisa resolver a venda. Ela cria conexão, entende o momento, identifica o principal objetivo ou barreira e conduz para a visita ou experiência.</p>
+  <table>
+    <tr><th>Momento</th><th>O que fazer</th></tr>
+    <tr><td><b>1. Abertura</b></td><td>Reforçar as boas-vindas sem repetir o texto. Ir direto para a conexão.</td></tr>
+    <tr><td><b>2. Qualificação</b></td><td>Pergunta com opções (a "varinha mágica"). Não aceitar sim, não ou talvez como resposta final.</td></tr>
+    <tr><td><b>3. Aprofundamento</b></td><td>Toda resposta importante vira uma segunda pergunta. Nunca mudar de assunto.</td></tr>
+    <tr><td><b>4. Pré-ancoragem</b></td><td>A própria pessoa valida o diferencial antes de qualquer preço.</td></tr>
+  </table>
+
+  <div class="script">
+    <div class="meta"><span class="tag">1. Abertura</span><button class="copy">Copiar</button></div>
+    <div class="ch">Ligação</div>
+    <div class="txt">Que bom que você conseguiu falar agora comigo, [NOME]! Já vou conseguir te explicar as coisas com calma. Antes de tudo, parabéns pela decisão de dar esse passo, isso já mostra que você tá levando a sério.</div>
+  </div>
+  <div class="script">
+    <div class="meta"><span class="tag">2. Qualificação · varinha mágica</span><button class="copy">Copiar</button></div>
+    <div class="ch">Ligação</div>
+    <div class="txt">Deixa eu te fazer uma pergunta: se você pudesse, com uma varinha mágica, melhorar rapidinho alguma coisa, tipo em 21 dias, o que você escolheria: sua disposição e energia, seu sono, sua nutrição, sua imunidade, sua disciplina e foco, ou tem alguma outra coisa que é bem importante pra você agora?</div>
+  </div>
+  <div class="script">
+    <div class="meta"><span class="tag">3. Aprofundamento</span><button class="copy">Copiar</button></div>
+    <div class="ch">Ligação · exemplo com "disposição e energia"</div>
+    <div class="txt">Isso faz muito sentido. Me conta um pouco mais, isso já vem de quanto tempo? Você já tentou resolver isso de alguma forma antes?</div>
+  </div>
+  <div class="script">
+    <div class="meta"><span class="tag">4. Pré-ancoragem</span><button class="copy">Copiar</button></div>
+    <div class="ch">Ligação</div>
+    <div class="txt">Olha, pelo que você me falou, dá pra montar algo bem específico pro seu momento. Isso aqui, inclusive, é uma das coisas que a gente faz diferente, nenhuma outra academia costuma perguntar isso antes de te oferecer qualquer coisa. Faz sentido pra você esse tipo de acompanhamento mais de perto?</div>
+  </div>
+  <div class="script">
+    <div class="meta"><span class="tag">Convite para o próximo passo</span><button class="copy">Copiar</button></div>
+    <div class="ch">Ligação</div>
+    <div class="txt">Perfeito. Pelo que você me contou, o ideal é a gente não ficar só falando por telefone. Quero te receber aqui e te mostrar como esse processo funciona para o seu objetivo.
+Tenho dois horários para te receber: hoje às [HORÁRIO 1] ou amanhã às [HORÁRIO 2]. Qual fica melhor?</div>
+  </div>
+  <div class="script">
+    <div class="meta"><span class="tag">Confirmação do agendamento</span><button class="copy">Copiar</button></div>
+    <div class="ch">WhatsApp · depois da ligação</div>
+    <div class="txt">Seu horário ficou agendado para [DIA], às [HORÁRIO].
+Vou deixar tudo organizado para te receber. Se acontecer qualquer imprevisto, me avisa por aqui para eu reorganizar seu horário.</div>
+    <div class="obs">A confirmação é sempre uma afirmação, nunca uma pergunta. "Você vem?" abre espaço para "não vou".</div>
+  </div>
+
+  <div class="rule"><b>Regra da ligação</b>Nunca terminar sem próximo passo definido: matrícula, experiência ou visita, ou retorno com data e hora.</div>
+
+  <h3>AQÚI aplicado a uma objeção: "Vou pensar"</h3>
+  <table>
+    <tr><th style="width:130px">Pilar</th><th>O que dizer</th></tr>
+    <tr><td><b>Acolher</b></td><td>Perfeito, é natural querer pensar antes de decidir algo importante.</td></tr>
+    <tr><td><b>Qualificar</b></td><td>O que você sente que ainda precisa avaliar antes de decidir? <i>(se vago)</i> Deixa eu te ajudar com isso: pensando na sua decisão, o que pesa mais, a disponibilidade de tempo, os programas e a metodologia que a gente tem aqui, ou o investimento? <i>(confirma)</i> Se não fosse por isso, você começaria hoje mesmo?</td></tr>
+    <tr><td><b>Única Coisa</b></td><td>Isso é bem comum, várias pessoas no seu momento sentem a mesma coisa, e dá pra resolver isso juntos(as). <i>(conecte com o fator que a pessoa nomeou: metodologia, tempo ou investimento, nunca com desconto)</i></td></tr>
+    <tr><td><b>Incentivar</b></td><td>Vou te ajudar com isso agora mesmo, vai ser ótimo, e você merece dar esse próximo passo. Separo os pontos principais e já vejo um horário pra fecharmos ainda essa semana, topa?</td></tr>
+  </table>
+</section>
+
+<!-- =============== PARTE 2 =============== -->
+<section class="part" id="indicacao">
+  <div class="part-label">Parte 2</div>
+  <h2>Funil de Feedback + Indicação</h2>
+  <p class="lead">Indicação não é um pedido frio de contatos. O funil começa validando a experiência, o resultado percebido e a qualidade do início do aluno. Só depois de um feedback positivo o consultor avança para a indicação.</p>
+
+  <table>
+    <tr><th>Momento</th><th>Quando</th><th>O que acontece</th></tr>
+    <tr><td><b>1. Na matrícula</b></td><td>No ato da matrícula</td><td>Aproveitar o entusiasmo do início e pedir 10 contatos, como um presente em nome do aluno.</td></tr>
+    <tr><td><b>2. Café de feedback</b></td><td>Entre o 3º e o 7º dia</td><td>Café antes ou depois do treino, ouvir a experiência e, se o feedback for positivo, pedir de 3 a 5 indicações.</td></tr>
+  </table>
+
+  <h3>Momento 1 · Indicação no ato da matrícula</h3>
+  <div class="script lime">
+    <div class="meta"><span class="tag">Transição</span><button class="copy">Copiar</button></div>
+    <div class="ch">Presencial · final da matrícula</div>
+    <div class="txt">A maioria dos nossos alunos não chegam sozinhos... eles vêm através de indicação, pois reconhecem que somos diferentes nesse cuidado e não querem aquele oba-oba de academia convencional, lotada, sem método...</div>
+  </div>
+  <div class="script lime">
+    <div class="meta"><span class="tag">Pedido de contatos</span><button class="copy">Copiar</button></div>
+    <div class="ch">Presencial</div>
+    <div class="txt">Agora escolha 10 pessoas aí dos seus contatos, independente de já treinarem ou não.
+Vai ser um presente em seu nome para essas pessoas conhecerem uma experiência diferente aqui com a gente.</div>
+  </div>
+  <div class="script lime">
+    <div class="meta"><span class="tag">Antes de a pessoa travar</span><button class="copy">Copiar</button></div>
+    <div class="ch">Presencial</div>
+    <div class="txt">Fica tranquilo, você não tem compromisso nenhum de que essas pessoas vão entrar.
+Como é algo exclusivo que apenas nossa academia tem, mesmo que a pessoa já treine, vai valer a pena pra ela.
+Enquanto eu organizo aqui, você já pode me mandar esses contatos.</div>
+  </div>
+
+  <h3>Momento 2 · Café de feedback (3º ao 7º dia)</h3>
+  <div class="script lime">
+    <div class="meta"><span class="tag">Convite para o café</span><button class="copy">Copiar</button></div>
+    <div class="ch">WhatsApp ou ligação</div>
+    <div class="txt">Passando para saber como estão sendo esses primeiros dias. Temos um café reservado para colocar a conversa em dia e ouvir suas primeiras percepções.
+Inclusive, acho que você vai gostar de uma novidade que estamos preparando para nossos alunos.
+Quero te ouvir melhor pessoalmente.</div>
+  </div>
+  <p>No encontro, valide a experiência dos primeiros dias e os primeiros sinais de resultado: avaliação física, consultoria, metas, Desafio de 21 dias e a percepção de acompanhamento.</p>
+  <div class="script lime">
+    <div class="meta"><span class="tag">Perguntas de feedback</span><button class="copy">Copiar</button></div>
+    <div class="ch">Presencial</div>
+    <div class="txt">O que você mais gostou até agora?
+O que já mudou pra você?
+Como você está se sentindo nesses primeiros dias? (energia, sono, disposição)
+Teve algo que te surpreendeu positivamente?
+Tem algo que poderíamos melhorar?</div>
+  </div>
+  <div class="script lime">
+    <div class="meta"><span class="tag">Validação do feedback positivo</span><button class="copy">Copiar</button></div>
+    <div class="ch">Presencial</div>
+    <div class="txt">Que bom ouvir isso.
+E é exatamente por isso que a gente faz o que faz aqui.</div>
+  </div>
+  <div class="warn"><b>Se o feedback for negativo</b>Resolva a experiência primeiro. <u>Não peça indicação.</u> Registre o problema, assuma a correção e marque um novo acompanhamento.</div>
+
+  <h3>Pedido de indicação após feedback positivo</h3>
+  <div class="script lime">
+    <div class="meta"><span class="tag">Pedido principal</span><button class="copy">Copiar</button></div>
+    <div class="ch">Presencial</div>
+    <div class="txt">Se você pudesse presentear 5 pessoas com essa oportunidade, quem seriam as primeiras que viriam na sua cabeça?</div>
+  </div>
+  <div class="script lime">
+    <div class="meta"><span class="tag">Transição alternativa</span><button class="copy">Copiar</button></div>
+    <div class="ch">Presencial</div>
+    <div class="txt">A gente tem um movimento aqui dentro de ajudar mais pessoas a começarem.
+Você pode presentear algumas pessoas com essa experiência.
+Pega seu celular... Quem hoje você acredita que merece passar por isso também?</div>
+  </div>
+
+  <h3>Respostas às objeções de indicação</h3>
+  <div class="script lime">
+    <div class="meta"><span class="tag">"Não sei quem indicar"</span><button class="copy">Copiar</button></div>
+    <div class="txt">Sem problema. Pensa em pessoas próximas que você sabe que gostariam de treinar, melhorar a saúde ou voltar a se cuidar. Normalmente os primeiros nomes já vêm na cabeça.</div>
+  </div>
+  <div class="script lime">
+    <div class="meta"><span class="tag">"Posso pensar e depois te mandar?"</span><button class="copy">Copiar</button></div>
+    <div class="txt">Claro. Só quero te pedir que não deixe passar muito, porque essa condição faz mais sentido enquanto essa rodada do projeto estiver aberta.</div>
+    <div class="obs">Use só se existir de fato uma rodada ou condição aberta. O método não depende de escassez artificial.</div>
+  </div>
+  <div class="script lime">
+    <div class="meta"><span class="tag">"Preciso falar com a pessoa antes"</span><button class="copy">Copiar</button></div>
+    <div class="txt">Perfeito. Inclusive isso ajuda. Se quiser, eu posso até te passar uma mensagem simples pra você encaminhar pra ela.</div>
+  </div>
+  <div class="script lime">
+    <div class="meta"><span class="tag">Mensagem que o aluno envia ao indicado</span><button class="copy">Copiar</button></div>
+    <div class="ch">WhatsApp · do aluno para o amigo</div>
+    <div class="txt">Oi, lembrei de você porque a academia me deu a chance de presentear algumas pessoas com uma oportunidade especial pra conhecer um projeto novo deles. Eles devem te chamar por WhatsApp. Vale a pena ouvir.</div>
+  </div>
+
+  <h3>Cadência de 7 dias para agendar o café de feedback</h3>
+  <p>Para alunos novos dos últimos 60 dias que ainda não fizeram o café. Alterne formatos, e cada toque precisa de um motivo novo.</p>
+  <div class="timeline">
+    <div><b>Dia 1</b>Imagem + texto</div>
+    <div class="call"><b>Dia 2</b>Ligação + áudio</div>
+    <div><b>Dia 3</b>Imagem + texto</div>
+    <div class="call"><b>Dia 4</b>Ligação + áudio</div>
+    <div><b>Dia 5</b>Imagem + texto</div>
+    <div class="call"><b>Dia 6</b>Ligação + áudio</div>
+    <div><b>Dia 7</b>Imagem + texto final</div>
+  </div>
+  <div class="rule"><b>Diretriz das imagens</b>Nunca mencione "indicação" na arte antes do encontro. Use curiosidade: "Queremos te ouvir", "Separamos algo especial pra você", "Últimos horários", "Novidades". A indicação entra presencialmente, depois do feedback.</div>
+  <div class="rule"><b>Quando o aluno responder</b>Pare a cadência e assuma a conversa manualmente. Se ele não responder em nenhuma das tentativas, aguarde cerca de 30 dias antes de uma nova abordagem.</div>
+</section>
+
+<!-- =============== PARTE 3 =============== -->
+<section class="part" id="rotina">
+  <div class="part-label">Parte 3</div>
+  <h2>Registro e rotina do gestor</h2>
+  <p class="lead">Todo processo precisa responder: quem faz, o que faz, quando faz, como faz, onde registra e qual é o próximo passo.</p>
+
+  <h3>Padrão mínimo de registro no CRM</h3>
+  <p>Nome · telefone · origem · responsável · qualificação · dores · objetivos · idade (quando aplicável) · perfil · etapa do funil · resultado do contato · <b>próximo contato com data e hora</b>.</p>
+
+  <h3>Indicadores que esses scripts precisam mover</h3>
+  <table>
+    <tr><th>Primeiro contato e ligação</th><th>Feedback + Indicação</th></tr>
+    <tr><td>Leads recebidos<br>Atendimentos iniciados<br>Contatos efetivos<br>Agendamentos<br>Comparecimentos<br>Vendas e conversão</td><td>Cafés de feedback agendados<br>Cafés realizados<br>Indicações geradas<br>Indicações convertidas em matrícula</td></tr>
+  </table>
+
+  <h3>Auditoria semanal</h3>
+  <ul class="check">
+    <li>Todos os leads têm dono, registro e próximo passo?</li>
+    <li>A cadência está sendo executada nos canais definidos?</li>
+    <li>Os cafés de feedback e os pedidos de indicação estão dentro da rotina?</li>
+    <li>Leads parados foram movidos para o funil correto?</li>
+    <li>Toda conversa que não fechou terminou com próximo contato marcado?</li>
+    <li>Os scripts estão sendo testados pela conversão, e não apenas por opinião?</li>
+  </ul>
+</section>
+
+<section class="cta">
+  
+  <h2 style="margin-top:14px">Quer implantar isso com a sua equipe?</h2>
+  <p>Este material é uma parte da metodologia que uso nas mentorias com donos de academia. Se quiser ajuda para colocar os funis para rodar na sua operação, me chama no Instagram <b style="color:#B8E62E">@nelsonrabelo165</b>.</p>
+</section>
+
+<div class="foot"><b>Nelson Rabelo</b> · Metodologia GeFit<br><img src="data:image/png;base64,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" alt="GeFit Fitness Intelligence" style="height:22px;margin-top:10px;background:#fff;border-radius:6px;padding:4px 7px;opacity:.9"></div>
+</div>
+
+<script>
+document.querySelectorAll(".copy").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const t=b.closest(".script").querySelector(".txt").innerText.trim();
+    const done=()=>{b.textContent="Copiado";b.classList.add("ok");setTimeout(()=>{b.textContent="Copiar";b.classList.remove("ok")},1600)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,()=>fallback(t,done))}else fallback(t,done);
+  });
+});
+function fallback(t,done){const a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();try{document.execCommand("copy");done()}catch(e){}a.remove()}
+</script>
+</body>
+</html>
