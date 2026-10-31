@@ -1525,9 +1525,11 @@ function aplicarSessao(s){
 // PRIORIDADE 2, sessão salva neste navegador, revalidada no Supabase
 // PRIORIDADE 3, tela de login manual (acesso direto, sem vir do painel)
 async function checkSession(){
+  const _q=new URLSearchParams(location.search);
   let ok=false;try{ok=!!localStorage.getItem('rqv_completo')}catch(e){ok=true}
-  if(!ok&&!new URLSearchParams(location.search).has('acesso')){location.replace('completo.html');return;}
-  let nome='';try{nome=(JSON.parse(localStorage.getItem('rqv_completo')||'{}').nome||'').split(' ')[0]}catch(e){}
+  if(!ok&&!_q.has('acesso')){location.replace('completo.html');return;}
+  if(!ok&&_q.has('acesso')){try{localStorage.setItem('rqv_completo',JSON.stringify({nome:_q.get('n')||'',via:'link_direto',when:Date.now()}))}catch(e){}}
+  let nome=(_q.get('n')||'').split(' ')[0];if(!nome){try{nome=(JSON.parse(localStorage.getItem('rqv_completo')||'{}').nome||'').split(' ')[0]}catch(e){}}
   document.getElementById('userNome').textContent=nome?('Olá, '+nome):'Versão completa';
   document.getElementById('userAcademia').textContent='Presente do time Nelson Rabelo';
   mostrarTela('appWrap');
