@@ -16,7 +16,15 @@ const CONFIG = {
   PDF: "Recepcao_que_Vende.pdf",
   HTML: "recepcao-que-vende.html",
   MATERIAL: "Recepcao que Vende · LP A",
-  INSTAGRAM: "nelsonrabelo165"
+  INSTAGRAM: "nelsonrabelo165",
+  // Central de Leads do GeFit | Painel Gestão (plataforma). Vazio = só planilha.
+  CENTRAL: {
+    SB_URL: "https://irwvagffrguiljaxrzmd.supabase.co",
+    SB_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlyd3ZhZ2Zmcmd1aWxqYXhyem1kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNDk5ODUsImV4cCI6MjEwNDkyNTk4NX0.YAApyaH6iIHEua_89fgCUpMzgXRIcWb_vNRkBQAoq5A",
+    ACADEMIA_ID: "9a6c2f10-1b4e-4c7a-8d2e-0f5b3c7e1a90",
+    CAMPANHA_ID: "5b1e7c2a-4d3f-4a8e-9c61-2f0d8e7a3b14",
+    CAMPANHA_SLUG: "recepcao-que-vende"
+  }
 };
 </script>
 <style>
@@ -300,6 +308,29 @@ function send(lead){
   if(!CONFIG.SHEETS_URL) return;
   const payload={...lead, material:CONFIG.MATERIAL, origem:new URLSearchParams(location.search).get("utm_source")||document.referrer||"direto"};
   try{ fetch(CONFIG.SHEETS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}); }catch(e){}
+  sendCentral(lead);
+}
+// Também grava na Central de Leads do GeFit | Painel Gestão. Mesmo WhatsApp = completa a ficha e soma no histórico.
+async function sendCentral(lead){
+  const C=CONFIG.CENTRAL; if(!C||!C.SB_URL||!C.SB_KEY) return;
+  try{
+    const H={"apikey":C.SB_KEY,"Authorization":"Bearer "+C.SB_KEY,"Content-Type":"application/json"};
+    const qs=new URLSearchParams(location.search), src=(qs.get("utm_source")||"").toLowerCase();
+    const origem=src.includes("nelson")?"instagram_nelson":src.includes("gefit")?"instagram_gefit":"isca_digital";
+    const norm="55"+lead.whatsapp;
+    const toque={data:new Date().toISOString(),campanha:C.CAMPANHA_SLUG,origem,utm_source:qs.get("utm_source")||null,utm_content:qs.get("utm_content")||null,material:CONFIG.MATERIAL};
+    const r=await fetch(C.SB_URL+"/rest/v1/leads?academia_id=eq."+C.ACADEMIA_ID+"&whatsapp_norm=eq."+norm+"&select=*&order=created_at.asc&limit=1",{headers:H});
+    const ex=r.ok?((await r.json())[0]||null):null;
+    const respostas={email:lead.email,instagram:lead.instagram,material:CONFIG.MATERIAL};
+    if(ex){
+      const patch={updated_at:new Date().toISOString(),historico:[...(Array.isArray(ex.historico)?ex.historico:[]),toque],respostas:{...(ex.respostas||{}),...respostas}};
+      if(!ex.cargo&&lead.papel) patch.cargo=lead.papel;
+      await fetch(C.SB_URL+"/rest/v1/leads?id=eq."+ex.id,{method:"PATCH",headers:{...H,"Prefer":"return=minimal"},body:JSON.stringify(patch)});
+      return;
+    }
+    const novo={academia_id:C.ACADEMIA_ID,campanha_id:C.CAMPANHA_ID,campanha_slug:C.CAMPANHA_SLUG,nome:lead.nome,whatsapp:lead.whatsapp,whatsapp_norm:norm,cargo:lead.papel||null,respostas,origem,origem_primeira:origem,utm_source:qs.get("utm_source"),utm_medium:qs.get("utm_medium"),utm_campaign:qs.get("utm_campaign"),utm_content:qs.get("utm_content"),pagina:location.pathname.split("/").pop()||"index.html",status:"novo",consentimento:true,historico:[toque]};
+    await fetch(C.SB_URL+"/rest/v1/leads",{method:"POST",headers:{...H,"Prefer":"return=minimal"},body:JSON.stringify(novo)});
+  }catch(e){}
 }
 </script>
 </body>
